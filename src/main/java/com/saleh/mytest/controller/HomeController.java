@@ -1,15 +1,28 @@
 package com.saleh.mytest.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
+@Controller
+@RequestMapping("/")
 public class HomeController {
 
-	@GetMapping("/")
-	public String getHome() {
-		return ("Welcome, world");
+	@GetMapping(value={"/", "/index"})
+	public String getHomePage(Model model) {
+		return "index";
+	}
+	
+	@GetMapping(value = "/login")
+	public String getLoginPage(Model model) {
+		return "login";
+	}
+	
+	@GetMapping(value = "/logout-succes")
+	public String getLogoutPage(Model model) {
+		return "logout";
 	}
 	
 	@GetMapping("/user")

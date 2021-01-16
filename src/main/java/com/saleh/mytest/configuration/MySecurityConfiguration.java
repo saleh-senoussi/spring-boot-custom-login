@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.saleh.mytest.service.MyUserDetailsService;
 
@@ -58,7 +59,16 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 					.httpBasic()
 				.and()
-					.formLogin();
+					.formLogin()
+						.loginPage("/login")
+							.permitAll()
+				.and()
+					.logout()
+						.invalidateHttpSession(true)
+						.clearAuthentication(true)
+						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+					.logoutSuccessUrl("/logout-success")
+						.permitAll();
 	}
 	
 }
