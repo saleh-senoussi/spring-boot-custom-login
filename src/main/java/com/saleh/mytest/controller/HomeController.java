@@ -20,7 +20,7 @@ public class HomeController {
 		return "login";
 	}
 	
-	@GetMapping(value = "/logout-succes")
+	@GetMapping(value = "/logout-success")
 	public String getLogoutPage(Model model) {
 		return "logout";
 	}
